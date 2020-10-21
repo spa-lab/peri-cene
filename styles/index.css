@@ -1,0 +1,15 @@
+.footer {
+  background-color: #f5f5f5;
+}
+
+.jumbotron {
+  /*background: url("../img/sample.jpg") no-repeat center center;*/
+  -webkit-background-size: cover; /*100% 100%;*/
+  -moz-background-size: cover; /*100% 100%;*/
+  -o-background-size: cover; /*100% 100%;*/
+  background-size: cover; /*100% 100%;*/
+}
+
+.card {
+  background-color: rgba(245, 245, 245, 0.9);
+}

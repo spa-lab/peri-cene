@@ -252,16 +252,91 @@
               <div class="p-0 h-100">
                 <div class="d-flex align-content-stretch flex-column h-100">
 
+                  <!-- Component: Cities View Model -->
                   <div id="citiesVM" class="mt-1">
+
+                    <h6>Select the city to view on the map.</h6>
+
                     <select class="browser-default custom-select custom-select-sm"
-                            v-model="selectedAuthority"
-                            v-on:change="updateView();">
-                      <option v-for="authority in authorities"
-                              v-bind:value="authority.value">
-                        {{ authority.name }}
+                            v-model="selectedCity"
+                            v-on:change="onSelectedCityChanged();">
+                      <option v-for="city in cities"
+                              v-bind:value="city.value">
+                        {{ city.name }}
                       </option>
                     </select>
                   </div>
+
+                  <!-- Component: Renderers View Model -->
+                  <div id="renderersVM" class="mt-2">
+
+                    <h6>Select the method to draw the map.</h6>
+
+                    <div class="btn-group btn-group-toggle d-flex flex-sm-row">
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.populationDensity.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('populationDensity')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.populationDensity.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.populationDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize">
+                          </span>
+                        <span v-text="renderers.populationDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.populationPotential.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('populationPotential')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm text-capitalize"
+                           v-bind:class="[renderers.populationPotential.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.populationPotential.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize">
+                          </span>
+                        <span v-text="renderers.populationPotential.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.periUrbanIndex.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('periUrbanIndex')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.periUrbanIndex.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.periUrbanIndex.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize"></span>
+                        <span v-text="renderers.periUrbanIndex.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.builtUpDensity.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('builtUpDensity')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.builtUpDensity.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.builtUpDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize"></span>
+                        <span v-text="renderers.builtUpDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                    </div>
+
+                  </div>
+
+
 
 
 

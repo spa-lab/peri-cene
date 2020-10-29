@@ -18,6 +18,11 @@
 
 
 /**
+ * The Application Data.
+ */
+var AppData = AppData || {};
+
+/**
  * Provides functions used globally.
  */
 let GlobalFunctions = {
@@ -993,15 +998,15 @@ let MapLayers = {
           getStyle: function(v) {
 
             let c = v >    0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-              v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-                v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-                  v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
+                    v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
+                    v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
+                    v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
                     v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-                      v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-                        v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-                          v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-                            v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-                              '#A80000';  // rgb(168,   0 ,0)
+                    v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
+                    v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
+                    v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
+                    v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
+                                            '#A80000';  // rgb(168,   0 ,0)
 
             return {
               stroke: true,
@@ -1066,15 +1071,15 @@ let MapLayers = {
           getStyle: function(v) {
 
             let c = v >    0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-              v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-                v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-                  v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
+                    v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
+                    v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
+                    v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
                     v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-                      v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-                        v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-                          v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-                            v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-                              '#A80000';  // rgb(168,   0 ,0)
+                    v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
+                    v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
+                    v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
+                    v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
+                                            '#A80000';  // rgb(168,   0 ,0)
 
             return {
               stroke: true,
@@ -1139,15 +1144,15 @@ let MapLayers = {
           getStyle: function(v) {
 
             let c = v >    0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-              v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-                v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-                  v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
+                    v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
+                    v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
+                    v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
                     v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-                      v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-                        v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-                          v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-                            v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-                              '#A80000';  // rgb(168,   0 ,0)
+                    v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
+                    v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
+                    v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
+                    v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
+                                            '#A80000';  // rgb(168,   0 ,0)
 
             return {
               stroke: true,
@@ -1212,15 +1217,15 @@ let MapLayers = {
           getStyle: function(v) {
 
             let c = v >    0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-              v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-                v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-                  v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
+                    v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
+                    v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
+                    v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
                     v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-                      v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-                        v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-                          v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-                            v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-                              '#A80000';  // rgb(168,   0 ,0)
+                    v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
+                    v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
+                    v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
+                    v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
+                                            '#A80000';  // rgb(168,   0 ,0)
 
             return {
               stroke: true,
@@ -1285,15 +1290,15 @@ let MapLayers = {
           getStyle: function(v) {
 
             let c = v >    0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-              v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-                v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-                  v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
+                    v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
+                    v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
+                    v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
                     v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-                      v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-                        v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-                          v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-                            v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-                              '#A80000';  // rgb(168,   0 ,0)
+                    v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
+                    v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
+                    v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
+                    v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
+                                            '#A80000';  // rgb(168,   0 ,0)
 
             return {
               stroke: true,
@@ -1719,14 +1724,63 @@ let Spatial = {
 };
 
 /**
- * Provides methods to get raster information from the REST GHIA raster server.
+ * Provides methods to get spatial data from GitHub.
  */
 let RestClient = {
 
   /**
    * The base url of the GHIA raster server.
    */
-  baseURL: 'http://maps.humanities.manchester.ac.uk/ghia-raster-server',
+  baseURL: 'https://raw.githubusercontent.com/spa-lab/peri-cene/main/geojson/',
+
+  /**
+   * Gets the peri-cene mapping spatial data for the specified city.
+   *
+   * @param city - The city that is used to get its spatial data.
+   */
+  getPericenePolygonData: function(city) {
+
+    url = this.baseURL + city + '.geojson';
+
+    axios.get(url)
+      .then(function(response) {
+
+        alert(JSON.stringify(response.data));
+
+      }).catch(function(error) {
+
+      // let result =
+      //   'ERROR:\r\n'  + '----------------------------------------\r\n' +
+      //   'MESSAGE: '     + error.message + '\r\n' +
+      //   'STACK: \r\n'   + error.stack + '\r\n\r\n' +
+      //   'REQUEST: \r\n' + JSON.stringify(error.request) + '\r\n\r\n' +
+      //   'CONFIG: \r\n'  + JSON.stringify(error.config) + '\r\n\r\n' +
+      //   'STATUS: '      + error.status + '\r\n' +
+      //   'STATUS TEXT: ' + error.statusText + '\r\n\r\n' +
+      //   'HEADERS: \r\n' + JSON.stringify(error.headers) + '\r\n\r\n' +
+      //   'DATA: \r\n'    + JSON.stringify(error.data) + '\r\n';
+      //
+      // alert(result);
+
+      let message =
+        '<div>' +
+        '<p>' +
+        '<span>MESSAGE: ' + error.message + '</span><br><br>' +
+        '<span>STATUS: ' + error.status + '</span><br>' +
+        '<span>STATUS TEXT: ' + error.statusText + '</span><br><br>' +
+        '</p>' +
+        '<div>';
+
+      popupViewModel.isError = true;
+      popupViewModel.title = 'An error has occurred getting results';
+      popupViewModel.htmlMessage = message;
+      popupViewModel.show();
+
+    }).finally(function() {
+      // TODO: Decide about finally.
+    });
+
+  },
 
   /**
    * Gets the raster metadata.
@@ -2119,6 +2173,191 @@ let toggleBaseMapViewModel = new Vue({
 });
 
 /**
+ * The renderersViewModel provides the data and logic to toggle the renderer of the map.
+ *
+ * @type {Vue} - A Vue object with the model and methods used in the view model.
+ */
+let renderersViewModel = new Vue({
+
+  /**
+   * The name of the view model.
+   */
+  el: "#renderersVM",
+
+  /**
+   * The model of the view model.
+   */
+  data: {
+
+    /**
+     * The renderers of the map.
+     */
+    renderers: {
+      populationDensity: {
+        isCurrent: true,
+        icon: 'fas fa-map-marked-alt',
+        buttonText: 'Population Density',
+        tooltip: 'Show the population density on the map',
+        field: 'pd'
+      },
+      populationPotential: {
+        isCurrent: false,
+        icon: 'fas fa-map-marked-alt',
+        buttonText: 'Population Potential',
+        tooltip: 'Show the population potential on the map',
+        field: 'pp'
+      },
+      periUrbanIndex: {
+        isCurrent: false,
+        icon: 'fas fa-map-marked-alt',
+        buttonText: 'Peri-urban Index',
+        tooltip: 'Show the peri-urban index on the map',
+        field: 'pi'
+      },
+      builtUpDensity: {
+        isCurrent: false,
+        icon: 'fas fa-map-marked-alt',
+        buttonText: 'BuiltUp Density',
+        tooltip: 'Show the built up density on the map',
+        field: 'bd'
+      }
+    },
+
+    /**
+     * Gets the current renderer.
+     *
+     * @returns {string} - A string with the current renderer name.
+     */
+    getCurrentRenderer: function() {
+
+      let currentRenderer = '';
+
+      for (let property in this.renderers) {
+        if (this.renderers.hasOwnProperty(property)) {
+          if (this.renderers[property].isCurrent) {
+            currentRenderer = property;
+            break;
+          }
+        }
+      }
+
+      return currentRenderer;
+
+    },
+
+    /**
+     * Gets the tooltip associated with the current renderer.
+     *
+     * @returns {string} - A string with the renderer's tooltip.
+     */
+    getTooltip: function() {
+
+      let tooltip = '';
+
+      for (let property in this.renderer) {
+        if (this.renderers.hasOwnProperty(property)) {
+          if (this.renderers[property].isCurrent) {
+            tooltip = this.renderers[property].tooltip;
+            break;
+          }
+        }
+      }
+
+      return tooltip;
+
+    }
+
+  },
+
+  /**
+   * The methods of the view model.
+   */
+  methods: {
+
+    /**
+     * Sets the current renderer.
+     *
+     * @param renderer - The renderer to become current.
+     * Valid values are: {'populationDensity' | 'populationPotential' | 'periUrbanIndex' | 'builtUpDensity'}.
+     */
+    setCurrentRenderer(renderer) {
+
+      for (let property in this.renderers) {
+        if (this.renderers.hasOwnProperty(property)) {
+          this.renderers[property].isCurrent = property === renderer;
+        }
+      }
+
+      if (renderer === 'populationDensity') {
+        // if (Spatial.map.editTools.drawing()) {
+        //   Spatial.map.editTools.stopDrawing();
+        // }
+        //
+        // Spatial.map.editTools.startMarker();
+        //
+        // if (MapLayers.lsoa.mapLayer !== null) {
+        //   MapLayers.lsoa.removeLayer();
+        // }
+        // if (MapLayers.wards.mapLayer !== null) {
+        //   MapLayers.wards.removeLayer();
+        // }
+      }
+      else if (renderer === 'populationPotential') {
+        // if (Spatial.map.editTools.drawing()) {
+        //   Spatial.map.editTools.stopDrawing();
+        // }
+        //
+        // Spatial.map.editTools.startPolygon();
+        //
+        // MapLayers.lsoa.removeLayer();
+        // MapLayers.wards.removeLayer();
+      }
+      else if (renderer === 'periUrbanIndex') {
+        // if (Spatial.map.editTools.drawing()) {
+        //   Spatial.map.editTools.stopDrawing();
+        // }
+        //
+        // Spatial.map.editTools.startMarker();
+        //
+        // spinnerViewModel.isVisible = true;
+        //
+        // MapLayers.wards.removeLayer();
+        // MapLayers.lsoa.renderLayer();
+        // MapLayers.lsoa.addLayer();
+        // MapLayers.queriedPolygons.mapLayer.bringToFront();
+        // MapLayers.queriedCentroids.mapLayer.bringToFront();
+        // MapLayers.greaterManchesterOutline.mapLayer.bringToFront();
+
+        spinnerViewModel.isVisible = false;
+      }
+      else if (renderer === 'builtUpDensity') {
+        // if (Spatial.map.editTools.drawing()) {
+        //   Spatial.map.editTools.stopDrawing();
+        // }
+        //
+        // Spatial.map.editTools.startMarker();
+        //
+        // spinnerViewModel.isVisible = true;
+        //
+        // MapLayers.lsoa.removeLayer();
+        // MapLayers.wards.renderLayer();
+        // MapLayers.wards.addLayer();
+        // MapLayers.queriedPolygons.mapLayer.bringToFront();
+        // MapLayers.queriedCentroids.mapLayer.bringToFront();
+        // MapLayers.greaterManchesterOutline.mapLayer.bringToFront();
+        //
+        // spinnerViewModel.isVisible = false;
+      }
+
+      alert(renderer);
+
+    }
+
+  }
+
+});
+
+/**
  * The citiesViewModel provides the data and logic to allow the user select which city is rendered on the map.
  *
  * @type {Vue} - A Vue object with the model and methods used in the view model.
@@ -2135,13 +2374,32 @@ let citiesViewModel = new Vue({
    */
   data: {
 
+    /**
+     * The list of cities that are rendered on the map.
+     */
     cities: [
-      { name: 'Chenai', file: '' },
-      { name: 'Manchester' },
-      { name: 'City 1' },
-      { name: 'City 2' },
-    ]
+      {
+        name:  'Chenai',
+        value: 'chennai'
+      },
+      {
+        name:  'Manchester',
+        value: 'manchester'
+      },
+      {
+        name:  'City 1',
+        value: 'city1'
+      },
+      {
+        name:  'City 2',
+        value: 'city2.'
+      },
+    ],
 
+    /**
+     * The selected city.
+     */
+    selectedCity: 'manchester'
 
   },
 
@@ -2157,10 +2415,23 @@ let citiesViewModel = new Vue({
    */
   methods: {
 
+    /**
+     *  Executes when the selected city has been changed.
+     */
+    onSelectedCityChanged() {
+
+      let url = 'https://raw.githubusercontent.com/spa-lab/peri-cene/main/geojson/' + this.selectedCity + '.geojson';
+
+      let message = 'Value: ' + this.selectedCity + '\r\n' +
+                    'URL:   ' + url;
+
+      alert(message);
+
+    }
+
   }
 
 });
-
 
 
 //
@@ -2174,6 +2445,8 @@ let citiesViewModel = new Vue({
 //   //AppState.bootstrapMaterialTooltipEnabled = true;
 //   $('[data-toggle="tooltip"]').tooltip();
 // });
+
+//RestClient.getPericenePolygonData('manchester', true);
 
 Spatial.initializeMap();
 

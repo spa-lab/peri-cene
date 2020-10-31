@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+  <meta http-equiv="Access-Control-Allow-Methods" content="*" />
+  <meta http-equiv="Access-Control-Allow-Headers" content="*" />
+
+  <title>Peri-cene | Urban Areas</title>
+
+  <meta name="author" content="Vasilis Vlastaras">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+  <!-- Stylesheets -->
+  <!-- Bootstrap core | Material Design Bootstrap CSS | Font-Awesome |
+       Leaflet | Leaflet Sidebar | Leaflet.pm | bruno Leaflet.Control.Fullscreen | Chart.js -->
+  <link rel="stylesheet" type="text/css" href="libs/mdb/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/mdb/css/mdb.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/fontawesome-free-5.9.0-web/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/leaflet-1.5.1/leaflet.css">
+  <!--  <link rel="stylesheet" type="text/css" href="../libs/leaflet-plugins/sidebar-v2-0.4.0/leaflet-sidebar.css">-->
+  <link rel="stylesheet" type="text/css" href="libs/leaflet-plugins/sidebar-v2-0.4.0/leaflet-sidebar.min.css">
+  <link rel="stylesheet" type="text/css" href="libs/leaflet-plugins/leaflet-pm-2.1.0/leaflet.pm.css">
+  <link rel="stylesheet" type="text/css" href="libs/chart-js-2.8.0/Chart.css">
+  <!--  <link rel="stylesheet" type="text/css" href="../libs/chart-js-2.8.0/Chart.min.css">-->
+
+  <link rel="stylesheet" type="text/css" href="styles/urban-areas.css">
+  <link rel="stylesheet" type="text/css" href="styles/loader.css">
+
+  <!-- JavaScript -->
+  <!-- JQuery | Font Awesome -->
+  <script type="text/javascript" src="libs/mdb/js/jquery-3.4.0.min.js"></script>
+  <script type="text/javascript" src="libs/fontawesome-free-5.9.0-web/js/all.min.js"></script>
+
+  <!--<script type="text/javascript" src="js/data.js"></script>-->
+  <!--<script type="text/javascript" src="js/shared.js"></script>-->
+</head>
+<body>
+
+<!-- Component: Navigation Menu -->
+<nav id="navBarHost" class="navbar fixed-top navbar-expand-lg navbar-dark special-color">
+  <a class="navbar-brand" href="index.html">
+    <img src="img/peri-cene-light.png" alt="peri-cene" height="30px">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="urban-areas.html">Urban Areas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="compare.html">Compare</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <a class="tw-ic" href="https://twitter.com/pericene" target="_blank">
+        <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
+      </a>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-container">
+
+  <!-- Component: Popup -->
+  <div class="modal fade" id="popupVM" tabindex="-1" role="dialog" aria-labelledby="popup-title" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="popup-title" v-text="title"
+              v-bind:class="[isError ? 'text-danger' : '']">
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="popup-message" v-html="htmlMessage"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal"
+                  v-bind:class="[isError ? 'btn-danger' : '']">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container">
+
+    <!-- Component: Spinner -->
+    <div id="spinnerVM" class="spinner" v-show="isVisible">
+<!--    <div id="spinnerVM" class="spinner"-->
+<!--         v-bind:class="[isVisible ? 'visible' : 'invisible'">-->
+      <div class="showbox">
+        <div class="loader">
+          <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Component: Map -->
+    <div id="map" class="sidebar-map"></div>
+
+    <!-- Component: Toggle Basemap Buttons -->
+    <div id="toggleBaseMapButtonsVM" class="btn-group rounded" role="group"
+         aria-label="Select basemap" data-toggle="buttons">
+
+      <div class="btn-group-toggle" role="group">
+        <!--dropdown-toggle-->
+        <!--data-toggle="tooltip" data-placement="bottom" v-bind:title="Click to change Basemap"-->
+        <button id="basemapDropdownButtonGroup" type="button" class="btn btn-indigo btn-raised dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                v-bind:aria-label="dictionary[currentBaseMap].description">
+          <!--v-bind:aria-pressed="[currentBaseMap === 'dark' ? 'true' : 'false']"-->
+          <!--<i class="far fa-map"></i>-->
+          <i id="currentBaseMapIcon" class="material-icons amber-text md-18"
+             v-text="dictionary[currentBaseMap].iconName">
+          </i>
+          <div id="currentBaseMapText">
+            <small class="text-capitalize text-center" v-text="dictionary[currentBaseMap].name"></small>
+          </div>
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="basemapDropdownButtonGroup">
+          <button id="lightButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['light'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'light' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'light' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('light')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'light' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['light'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['light'].name"></span>
+            </div>
+          </button>
+          <button id="darkButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['dark'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'dark' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'dark' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('dark')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'dark' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['dark'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['dark'].name"></span>
+            </div>
+          </button>
+          <button id="roadsButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['roads'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'roads' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'roads' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('roads')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'roads' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['roads'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['roads'].name"></span>
+            </div>
+          </button>
+          <button id="terrainButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['terrain'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'terrain' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'terrain' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('terrain')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'terrain' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['terrain'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['terrain'].name"></span>
+            </div>
+          </button>
+          <button id="physicalButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['physical'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'physical' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'physical' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('physical')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'physical' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['physical'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['physical'].name"></span>
+            </div>
+          </button>
+          <button id="satelliteButton" type="button" class="btn dropdown-item dropdown-item-basemap mb-1"
+                  v-bind:aria-label="dictionary['satellite'].description"
+                  v-bind:aria-pressed="[currentBaseMap === 'satellite' ? 'true' : 'false']"
+                  v-bind:class="[currentBaseMap === 'satellite' ? 'btn-indigo btn-raised' : '']"
+                  v-on:click="setCurrentBaseMap('satellite')">
+            <div class="pt-2 pb-2">
+              <i class="material-icons v-allign-middle"
+                 v-bind:class="[currentBaseMap === 'satellite' ? 'amber-text' : 'text-dark']"
+                 v-text="dictionary['satellite'].iconName">
+              </i>
+              <span class="v-allign-middle" v-text="dictionary['satellite'].name"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Component: Sidebar -->
+  <div>
+    <div id="sidebar" class="sidebar collapsed sidebar-right leaflet-touch">
+
+      <!-- Component: Sidebar Tabs -->
+      <div id="sidebarTabsVM" class="sidebar-tabs">
+        <ul role="tablist">
+          <li id="map-controls-button" title="Show / Hide Map Controls"
+              data-toggle="tooltip" data-placement="left" aria-label="Show / Hide Map Controls"
+              v-on:click="hideTooltip('#map-controls-button')">
+            <a href="#map-controls" role="tab">
+              <i class="peri-cene-material-icons text-dark">menu</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Component: Sidebar Content -->
+      <div class="sidebar-content h-100">
+
+        <!-- Component: Interactivity -->
+        <div class="sidebar-pane h-100" id="map-controls">
+
+          <div class="pane-container h-100" >
+
+            <!-- Component: Dashboard -->
+            <div id="dashboard" class="h-100 ver-scrollbars">
+              <div class="p-0 h-100">
+                <div class="d-flex align-content-stretch flex-column h-100">
+
+                  <!-- Component: Urban Areas View Model -->
+                  <div id="urbanAreasVM" class="mt-1">
+
+                    <h6>Select the urban area to view on the map.</h6>
+
+                    <select class="browser-default custom-select custom-select-sm"
+                            v-model="selectedUrbanArea"
+                            v-on:change="onSelectedUrbanAreaChanged();">
+                      <option v-for="urbanArea in urbanAreas"
+                              v-bind:value="urbanArea.value">
+                        {{ urbanArea.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- Component: Renderers View Model -->
+                  <div id="renderersVM" class="mt-2">
+
+                    <h6>Select the method to draw the map.</h6>
+
+                    <div class="btn-group btn-group-toggle d-flex flex-sm-row">
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.populationDensity.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('populationDensity')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.populationDensity.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.populationDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize">
+                          </span>
+                        <span v-text="renderers.populationDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.populationPotential.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('populationPotential')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm text-capitalize"
+                           v-bind:class="[renderers.populationPotential.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.populationPotential.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize">
+                          </span>
+                        <span v-text="renderers.populationPotential.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.periUrbanIndex.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('periUrbanIndex')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.periUrbanIndex.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.periUrbanIndex.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize"></span>
+                        <span v-text="renderers.periUrbanIndex.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                      <button type="button" class="btn btn-primary padding-small padding-small-below-sm m-1"
+                              v-bind:class="[renderers.builtUpDensity.isCurrent ? 'active' : '']"
+                              v-on:click="setCurrentRenderer('builtUpDensity')">
+                        <i class="amber-text fa-lg ml-1 mr-1 invisible-below-sm"
+                           v-bind:class="[renderers.builtUpDensity.icon]">
+                        </i>
+                        <br>
+                        <span v-text="renderers.builtUpDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 font-size-8 invisible-above-sm text-capitalize"></span>
+                        <span v-text="renderers.builtUpDensity.buttonText"
+                              class="ml-xs-1 mr-xs-1 invisible-below-sm text-capitalize">
+                          </span>
+                      </button>
+
+                    </div>
+
+                  </div>
+
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- JavaScript -->
+<!--<script type="text/javascript" src="../libs/axios-0.18.1/axios.js"></script>-->
+<script type="text/javascript" src="libs/axios-0.18.1/axios.min.js"></script>
+<script type="text/javascript" src="libs/vue-2.6.10/vue.js"></script>
+<!--<script type="text/javascript" src="../libs/vue-2.6.10/vue.min.js"></script>-->
+
+<!--<script type="text/javascript" src="../libs/chart-js-2.7.2/chart.min.js"></script>-->
+
+<script type="text/javascript" src="libs/mdb/js/popper.min.js"></script>
+
+<!--<script type="text/javascript" src="../libs/leaflet-1.5.1/leaflet.js"></script>-->
+<script type="text/javascript" src="libs/leaflet-1.5.1/leaflet-src.js"></script>
+<!--<script type="text/javascript" src="../libs/leaflet-plugins/leaflet-providers-1.1.17/leaflet-providers.js"></script>-->
+<script type="text/javascript" src="libs/leaflet-plugins/leaflet-providers-2018-04-11/leaflet-providers.js"></script>
+<!--<script type="text/javascript" src="../libs/leaflet-plugins/sidebar-v2-0.4.0/leaflet-sidebar.js"></script>-->
+<script type="text/javascript" src="libs/leaflet-plugins/sidebar-v2-0.4.0/leaflet-sidebar.min.js"></script>
+<!--<script type="text/javascript" src="../libs/leaflet-plugins/leaflet-pouch/leaflet.pouch.js"></script>-->
+<script type="text/javascript" src="libs/leaflet-plugins/leaflet-editable-1.2.0/leaflet-editable.js"></script>
+
+<script type="text/javascript" src="libs/chart-js-2.8.0/Chart.js"></script>
+<!--<script type="text/javascript" src="../libs/chart-js-2.8.0/Chart.min.js"></script>-->
+
+<!--<script type="text/javascript" src="../libs/bootstrap-material-design-v4.1.1/js/bootstrap-material-design.js"></script>-->
+<!--<script type="text/javascript" src="../libs/bootstrap-material-design-v4.1.1/js/bootstrap-material-design.min.js"></script>-->
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="libs/mdb/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="libs/mdb/js/mdb.min.js"></script>
+
+<!--<script type="text/javascript" src="../libs/ps-math-stats/ps-math-stats.min.js"></script>-->
+
+<script type="text/javascript" src="js/color-palettes.js"></script>
+
+<!--<script type="text/javascript" src="js/data/gm-outline-generalised.js"></script>-->
+<!--<script type="text/javascript" src="js/data/gm-wards-2019-generalised.js"></script>-->
+<!--<script type="text/javascript" src="js/data/gm-lsoa-2011-generalised.js"></script>-->
+
+<script type="text/javascript" src="js/data/chennai.js"></script>
+<script type="text/javascript" src="js/data/manchester.js"></script>
+
+<script type="text/javascript" src="js/urban-areas.js"></script>
+
+</body>
+</html>

@@ -84,53 +84,50 @@ body {
 
 /*
  *  ================================================================================
- *    Raster Values Table
+ *    Legend Table
  *  ================================================================================
  */
-.raster-value-table {
+.legend-table {
   margin: -10px;
 }
 
-.raster-value-index {
+.legend-index {
   padding-left: 3px;
   padding-right: 3px;
 }
 
-.raster-value-value {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.raster-value-form {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.raster-value-function {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.raster-value-count {
+.legend-style {
   padding-left: 3px;
   padding-right: 3px;
   width: 60px;
 }
 
-.raster-value-percentage {
+.legend-name {
   padding-left: 3px;
   padding-right: 3px;
-  width: 40px;
 }
 
-.typology-class-header {
-  margin-top: -21px;
-}
 
-.group-toggle-link {
-  font-size: 1rem;
-  margin-left: 5px;
-}
+/*.raster-value-count {*/
+/*  padding-left: 3px;*/
+/*  padding-right: 3px;*/
+/*  width: 60px;*/
+/*}*/
+
+/*.raster-value-percentage {*/
+/*  padding-left: 3px;*/
+/*  padding-right: 3px;*/
+/*  width: 40px;*/
+/*}*/
+
+/*.typology-class-header {*/
+/*  margin-top: -21px;*/
+/*}*/
+
+/*.group-toggle-link {*/
+/*  font-size: 1rem;*/
+/*  margin-left: 5px;*/
+/*}*/
 
 /*
  *  ================================================================================

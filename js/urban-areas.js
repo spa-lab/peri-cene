@@ -54,7 +54,12 @@ let AppState = {
   /**
    * The transparent color is used in those cases that a highly transparent color needs to be rendered.
    */
-  transparentColor: { fillColor: '#ffffff', fillOpacity: 0.01 }
+  transparentColor: { fillColor: '#ffffff', fillOpacity: 0.01 },
+
+  /**
+   * The current urban area.
+   */
+  currentUrbanArea: 'manchester'
 
 };
 
@@ -68,16 +73,16 @@ let Renderers = {
     entries: 10,
 
     texts: {
-      0: { index: 1,  text: '[0, 10]',      },
-      1: { index: 2,  text: '(10, 20]',     },
-      2: { index: 3,  text: '(20, 50]',     },
-      3: { index: 4,  text: '(50, 125]',    },
-      4: { index: 5,  text: '(125, 300]',   },
-      5: { index: 6,  text: '(300, 700]',   },
-      6: { index: 7,  text: '(700, 1500]',  },
-      7: { index: 8,  text: '(1500, 3500]', },
-      8: { index: 9,  text: '(3500, 7500]', },
-      9: { index: 10, text: '> 7500',       },
+      0: { index: 1,  text: '[0, 10]'      },
+      1: { index: 2,  text: '(10, 20]'     },
+      2: { index: 3,  text: '(20, 50]'     },
+      3: { index: 4,  text: '(50, 125]'    },
+      4: { index: 5,  text: '(125, 300]'   },
+      5: { index: 6,  text: '(300, 700]'   },
+      6: { index: 7,  text: '(700, 1500]'  },
+      7: { index: 8,  text: '(1500, 3500]' },
+      8: { index: 9,  text: '(3500, 7500]' },
+      9: { index: 10, text: '> 7500'       },
     },
 
     baseMaps: {
@@ -93,16 +98,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       },
       dark: {
@@ -117,16 +122,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       },
       roads: {
@@ -141,16 +146,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       },
       physical: {
@@ -165,16 +170,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       },
       terrain: {
@@ -189,16 +194,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       },
       satellite: {
@@ -213,16 +218,16 @@ let Renderers = {
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
         fillColors: {
-          0: '#38A800', // rgb( 56, 168, 0)
-          1: '#4CE600', // rgb( 76, 230, 0)
-          2: '#55FF00', // rgb( 85, 255, 0)
-          3: '#DFEB00', // rgb(223, 235, 0)
-          4: '#FFFF00', // rgb(255, 255, 0)
-          5: '#EAAE00', // rgb(234, 174, 0)
-          6: '#FFAA00', // rgb(255, 170, 0)
-          7: '#D47800', // rgb(212, 120, 0)
-          8: '#BF4900', // rgb(191,  73, 0)
-          9: '#A80000', // rgb(168,   0 ,0)
+          0: '#38a800', // rgb( 56, 168, 0)
+          1: '#4ce600', // rgb( 76, 230, 0)
+          2: '#55ff00', // rgb( 85, 255, 0)
+          3: '#dfeb00', // rgb(223, 235, 0)
+          4: '#ffff00', // rgb(255, 255, 0)
+          5: '#eaae00', // rgb(234, 174, 0)
+          6: '#ffaa00', // rgb(255, 170, 0)
+          7: '#d47800', // rgb(212, 120, 0)
+          8: '#bf4900', // rgb(191,  73, 0)
+          9: '#a80000', // rgb(168,   0 ,0)
         }
       }
     },
@@ -235,15 +240,15 @@ let Renderers = {
      */
     getIndex: function(v) {
 
-      return v >=   0 && v <=   10 ? 0 :
-             v >   10 && v <=   20 ? 1 :
-             v >   20 && v <=   50 ? 2 :
-             v >   50 && v <=  125 ? 3 :
-             v >  125 && v <=  300 ? 4 :
-             v >  300 && v <=  700 ? 5 :
-             v >  700 && v <= 1500 ? 6 :
-             v > 1500 && v <= 3500 ? 7 :
-             v > 3500 && v <= 7500 ? 8 :
+      return v >=    0 && v <=   10 ? 0 :
+             v >    10 && v <=   20 ? 1 :
+             v >    20 && v <=   50 ? 2 :
+             v >    50 && v <=  125 ? 3 :
+             v >   125 && v <=  300 ? 4 :
+             v >   300 && v <=  700 ? 5 :
+             v >   700 && v <= 1500 ? 6 :
+             v >  1500 && v <= 3500 ? 7 :
+             v >  3500 && v <= 7500 ? 8 :
                                      9;
 
     },
@@ -301,16 +306,16 @@ let Renderers = {
     entries: 10,
 
     texts: {
-      0: { index: 1,  text: '[0, 10]',      },
-      1: { index: 2,  text: '(10, 20]',     },
-      2: { index: 3,  text: '(20, 50]',     },
-      3: { index: 4,  text: '(50, 125]',    },
-      4: { index: 5,  text: '(125, 300]',   },
-      5: { index: 6,  text: '(300, 700]',   },
-      6: { index: 7,  text: '(700, 1500]',  },
-      7: { index: 8,  text: '(1500, 3500]', },
-      8: { index: 9,  text: '(3500, 7500]', },
-      9: { index: 10, text: '> 7500',       },
+      0: { index: 1,  text: '[0.00, 0.10]' },
+      1: { index: 2,  text: '(0.10, 0.20]' },
+      2: { index: 3,  text: '(0.20, 0.30]' },
+      3: { index: 4,  text: '(0.30, 0.40]' },
+      4: { index: 5,  text: '(0.40, 0.50]' },
+      5: { index: 6,  text: '(0.50, 0.60]' },
+      6: { index: 7,  text: '(0.60, 0.70]' },
+      7: { index: 8,  text: '(0.70, 0.80]' },
+      8: { index: 9,  text: '(0.80, 0.90]' },
+      9: { index: 10, text: '(0.90, 1.00]' },
     },
 
     baseMaps: {
@@ -531,6 +536,192 @@ let Renderers = {
    */
   periUrbanIndex: {
 
+    entries: 5,
+
+    texts: {
+      0: { index: 1,  text: '[0.00, 0.21]' },
+      1: { index: 2,  text: '(0.21, 0.34]' },
+      2: { index: 3,  text: '(0.34, 0.44]' },
+      3: { index: 4,  text: '(0.44, 0.55]' },
+      4: { index: 5,  text: '(0.55, 1.00]' }
+    },
+
+    baseMaps: {
+      light: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      },
+      dark: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      },
+      roads: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      },
+      physical: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.6
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      },
+      terrain: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      },
+      satellite: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#9ca800', // rgb(156, 168,   0)
+          1: '#8bd100', // rgb(139, 209,   0)
+          2: '#ffff00', // rgb(255, 255,   0)
+          3: '#ff8000', // rgb(255, 128,   0)
+          4: '#ff0000', // rgb(255,   0,   0)
+        }
+      }
+    },
+
+    /**
+     * Gets the index of the value.
+     *
+     * @param v - The value whose index will be retrieved.
+     * @returns {number} - The index of the renderer entry.
+     */
+    getIndex: function(v) {
+
+      return v >=  0 && v <= 21 ? 0 :
+             v >  21 && v <= 34 ? 1 :
+             v >  34 && v <= 44 ? 2 :
+             v >  44 && v <= 54 ? 3 :
+                                  4;
+
+    },
+
+    /**
+     * Gets a style based on population density value.
+     *
+     * @param v - The population density value.
+     * @param basemap - The basemap whose associated style will be retrieved.
+     * @returns - The style used for the specified population density value.
+     */
+    getFillColor: function(v, basemap) {
+
+      let index = Renderers.periUrbanIndex.getIndex(v);
+
+      return Renderers.periUrbanIndex.baseMaps[basemap].fillColors[index.toString()];
+
+    },
+
+    /**
+     * Gets a style based on population density value.
+     *
+     * @param v - The population density value.
+     * @param basemap - The basemap whose associated style will be retrieved.
+     * @returns - The style used for the specified population density value.
+     */
+    getStyle: function(v, basemap) {
+
+      let index = Renderers.periUrbanIndex.getIndex(v);
+
+      let baseStyle = Renderers.periUrbanIndex.baseMaps[basemap].baseStyle;
+      let fillColor = Renderers.periUrbanIndex.baseMaps[basemap].fillColors[index.toString()];
+
+      return {
+        stroke: baseStyle.stroke,
+        color: baseStyle.color,
+        weight: baseStyle.weight,
+        opacity: baseStyle.opacity,
+        fill: baseStyle.fill,
+        fillColor: fillColor,
+        fillOpacity: baseStyle.fillOpacity
+        //lineCap: 'round',  // butt | round | square | inherit
+        //lineJoin: 'round'  // miter | round | bevel | inherit
+      }
+
+    }
+
   },
 
   /**
@@ -538,10 +729,217 @@ let Renderers = {
    */
   builtUpDensity: {
 
-  },
+    entries: 8,
 
+    texts: {
+      0: { index: 1,  text: ' [0,   3]' },
+      1: { index: 2,  text: ' (3,  10]' },
+      2: { index: 3,  text: '(10,  25]' },
+      3: { index: 4,  text: '(25,  50]' },
+      4: { index: 5,  text: '(50,  80]' },
+      5: { index: 5,  text: '(80,  90]' },
+      6: { index: 5,  text: '(90,  96]' },
+      7: { index: 5,  text: '(96, 100]' }
+    },
 
+    baseMaps: {
+      light: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      },
+      dark: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      },
+      roads: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      },
+      physical: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.6
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      },
+      terrain: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      },
+      satellite: {
+        baseStyle: {
+          stroke: true,
+          color: ColorPalettes.Material.gray700.hex,
+          weight: 0.5,
+          opacity: 1,
+          fill: true,
+          fillOpacity: 0.7
+          //lineCap: 'round',  // butt | round | square | inherit
+          //lineJoin: 'round'  // miter | round | bevel | inherit
+        },
+        fillColors: {
+          0: '#ffebd6', // rgb(255, 235, 214)
+          1: '#f5cfb3', // rgb(245, 207, 179)
+          2: '#edb493', // rgb(237, 180, 147)
+          3: '#e69575', // rgb(230, 149, 117)
+          4: '#db7356', // rgb(219, 115,  86)
+          5: '#d4503b', // rgb(212,  80,  59)
+          6: '#cc2e23', // rgb(204,  46,  35)
+          7: '#c40a0a', // rgb(196,  10,  10)
+        }
+      }
+    },
 
+    /**
+     * Gets the index of the value.
+     *
+     * @param v - The value whose index will be retrieved.
+     * @returns {number} - The index of the renderer entry.
+     */
+    getIndex: function(v) {
+
+      return v >=   0 && v <=  30 ? 0 :
+             v >   30 && v <= 100 ? 1 :
+             v >  100 && v <= 250 ? 2 :
+             v >  250 && v <= 500 ? 3 :
+             v >  500 && v <= 800 ? 4 :
+             v >  800 && v <= 900 ? 5 :
+             v >  900 && v <= 960 ? 6 :
+                                    7;
+
+    },
+
+    /**
+     * Gets a style based on population density value.
+     *
+     * @param v - The population density value.
+     * @param basemap - The basemap whose associated style will be retrieved.
+     * @returns - The style used for the specified population density value.
+     */
+    getFillColor: function(v, basemap) {
+
+      let index = Renderers.builtUpDensity.getIndex(v);
+
+      return Renderers.builtUpDensity.baseMaps[basemap].fillColors[index.toString()];
+
+    },
+
+    /**
+     * Gets a style based on population density value.
+     *
+     * @param v - The population density value.
+     * @param basemap - The basemap whose associated style will be retrieved.
+     * @returns - The style used for the specified population density value.
+     */
+    getStyle: function(v, basemap) {
+
+      let index = Renderers.builtUpDensity.getIndex(v);
+
+      let baseStyle = Renderers.builtUpDensity.baseMaps[basemap].baseStyle;
+      let fillColor = Renderers.builtUpDensity.baseMaps[basemap].fillColors[index.toString()];
+
+      return {
+        stroke: baseStyle.stroke,
+        color: baseStyle.color,
+        weight: baseStyle.weight,
+        opacity: baseStyle.opacity,
+        fill: baseStyle.fill,
+        fillColor: fillColor,
+        fillOpacity: baseStyle.fillOpacity
+        //lineCap: 'round',  // butt | round | square | inherit
+        //lineJoin: 'round'  // miter | round | bevel | inherit
+      }
+
+    }
+
+  }
 
 };
 
@@ -993,6 +1391,11 @@ let MapLayers = {
     geoJSON: null,
 
     /**
+     * Indicates whether this layer is used on the map.
+     */
+    isUsed: false,
+
+    /**
      * Creates the Greater Manchester Outline layer.
      */
     createLayer: function() {
@@ -1000,7 +1403,7 @@ let MapLayers = {
       // Get the named basemap layer.
       let namedBaseMap = toggleBaseMapViewModel.currentBaseMap;
 
-      this.geoJSON = AppData.manchester.outline;
+      this.geoJSON = AppData[AppState.currentUrbanArea].outline;
 
       this.mapLayer = L.geoJSON(this.geoJSON, {
 
@@ -1017,9 +1420,19 @@ let MapLayers = {
 
       });
 
-      // Add the layer in to the map and make sure it is visible.
+      // Add the layer on to the map and make sure it is visible.
       this.mapLayer.addTo(Spatial.map);
       this.mapLayer.bringToFront();
+      this.isUsed = true;
+
+      // Zoom to the extent of the layer.
+      Spatial.map.fitBounds(
+        [
+          [AppData[AppState.currentUrbanArea].outline.bbox[1], AppData[AppState.currentUrbanArea].outline.bbox[0]],
+          [AppData[AppState.currentUrbanArea].outline.bbox[3], AppData[AppState.currentUrbanArea].outline.bbox[2]]
+        ],
+        { paddingBottomRight: [350, 0] }
+      );
 
     },
 
@@ -1038,6 +1451,31 @@ let MapLayers = {
           layer.setStyle(MapLayers.outline.namedBasemapLayers[currentBaseMap].defaultStyle);
         });
 
+      }
+
+    },
+
+    /**
+     * Adds the lad layer on the map.
+     */
+    addLayer: function() {
+
+      if (!Spatial.map.hasLayer(this.mapLayer)) {
+        Spatial.map.addLayer(this.mapLayer);
+        this.mapLayer.bringToFront();
+        this.isUsed = true;
+      }
+
+    },
+
+    /**
+     * Removes the LAD layer from the map.
+     */
+    removeLayer: function() {
+
+      if (Spatial.map.hasLayer(this.mapLayer)) {
+        Spatial.map.removeLayer(this.mapLayer);
+        this.isUsed = false;
       }
 
     }
@@ -1205,6 +1643,11 @@ let MapLayers = {
     geoJSON: null,
 
     /**
+     * Indicates whether this layer is used on the map.
+     */
+    isUsed: false,
+
+    /**
      * Creates the LAD layer.
      */
     createLayer: function() {
@@ -1212,9 +1655,7 @@ let MapLayers = {
       // Get the named basemap layer.
       let namedBaseMap = toggleBaseMapViewModel.currentBaseMap;
 
-      if (this.geoJSON === null) {
-        this.geoJSON = AppData.manchester.lad;
-      }
+      this.geoJSON = AppData[AppState.currentUrbanArea].lad;
 
       this.mapLayer = L.geoJSON(this.geoJSON, {
 
@@ -1239,6 +1680,7 @@ let MapLayers = {
       // Add the layer in to the map and make sure it is visible.
       this.mapLayer.addTo(Spatial.map);
       this.mapLayer.bringToFront();
+      this.isUsed = true;
 
     },
 
@@ -1269,6 +1711,7 @@ let MapLayers = {
       if (!Spatial.map.hasLayer(this.mapLayer)) {
         Spatial.map.addLayer(this.mapLayer);
         this.mapLayer.bringToFront();
+        this.isUsed = true;
       }
 
     },
@@ -1280,6 +1723,7 @@ let MapLayers = {
 
       if (Spatial.map.hasLayer(this.mapLayer)) {
         Spatial.map.removeLayer(this.mapLayer);
+        this.isUsed = false;
       }
 
     }
@@ -1376,59 +1820,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     //return Renderers.populationDensity.getStyle(v,'light');
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
-        //
-        // populationPotential: {
-        //
-        // },
-        //
-        // periUrbanIndex: {
-        //
-        // },
-        //
-        // builtUpDensity: {
-        //
-        // }
-
+        }
 
       },
 
@@ -1464,44 +1856,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
+        }
 
       },
 
@@ -1537,44 +1892,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
+        }
 
       },
 
@@ -1610,44 +1928,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
+        }
 
       },
 
@@ -1683,44 +1964,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
+        }
 
       },
 
@@ -1756,44 +2000,7 @@ let MapLayers = {
           fillOpacity: 0.4
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
-        },
-
-        // populationDensity: {
-        //
-        //   /**
-        //    * Gets a style based on population density value.
-        //    *
-        //    * @param v - The population density value.
-        //    * @returns - The style used for the specified population density value.
-        //    */
-        //   getStyle: function(v) {
-        //
-        //     let c = v >=   0 && v <=   10 ? '#38A800' : // rgb( 56, 168, 0)
-        //             v >   10 && v <=   20 ? '#4CE600' : // rgb( 76, 230, 0)
-        //             v >   20 && v <=   50 ? '#55FF00' : // rgb( 85, 255, 0)
-        //             v >   50 && v <=  125 ? '#DFEB00' : // rgb(223, 235, 0)
-        //             v >  125 && v <=  300 ? '#FFFF00' : // rgb(255, 255, 0)
-        //             v >  300 && v <=  700 ? '#EAAE00' : // rgb(234, 174, 0)
-        //             v >  700 && v <= 1500 ? '#FFAA00' : // rgb(255, 170, 0)
-        //             v > 1500 && v <= 3500 ? '#D47800' : // rgb(212, 120, 0)
-        //             v > 3500 && v <= 7500 ? '#BF4900' : // rgb(191,  73, 0)
-        //                                     '#A80000';  // rgb(168,   0 ,0)
-        //
-        //     return {
-        //       stroke: true,
-        //       color: ColorPalettes.Material.gray700.hex,
-        //       weight: 0.5,
-        //       opacity: 1,
-        //       fill: true,
-        //       fillColor: c,
-        //       fillOpacity: 0.4
-        //       //lineCap: 'round',  // butt | round | square | inherit
-        //       //lineJoin: 'round'  // miter | round | bevel | inherit
-        //     }
-        //
-        //   }
-        //
-        // },
+        }
 
       }
 
@@ -1808,6 +2015,11 @@ let MapLayers = {
      * The GeoJSON used to create the leaflet map layer.
      */
     geoJSON: null,
+
+    /**
+     * Indicates whether this layer is used on the map.
+     */
+    isUsed: false,
 
     /**
      * The dictionary used to retrieve an internal feature layer based on a feature key.
@@ -1833,9 +2045,7 @@ let MapLayers = {
       // Get the named basemap layer.
       let namedBaseMap = toggleBaseMapViewModel.currentBaseMap;
 
-      if (this.geoJSON === null) {
-        this.geoJSON = AppData.manchester.indices;
-      }
+      this.geoJSON = AppData[AppState.currentUrbanArea].indices;
 
       this.mapLayer = L.geoJSON(this.geoJSON, {
 
@@ -1902,6 +2112,7 @@ let MapLayers = {
       // Add the layer in to the map and make sure it is visible.
       this.mapLayer.addTo(Spatial.map);
       this.mapLayer.bringToFront();
+      this.isUsed = true;
 
       // Loop through all the internal layers and bind a tooltip.
       this.mapLayer.eachLayer(function(layer) {
@@ -1954,6 +2165,7 @@ let MapLayers = {
       if (!Spatial.map.hasLayer(this.mapLayer)) {
         Spatial.map.addLayer(this.mapLayer);
         this.mapLayer.bringToFront();
+        this.isUsed = true;
       }
 
     },
@@ -1965,6 +2177,7 @@ let MapLayers = {
 
       if (Spatial.map.hasLayer(this.mapLayer)) {
         Spatial.map.removeLayer(this.mapLayer);
+        this.isUsed = false;
       }
 
     },
@@ -2164,10 +2377,19 @@ let Spatial = {
    */
   urbanAreas: {
     chennai: {
-      layers: [ 'indices', 'outline' ]
+      //layers: [ 'indices', 'outline' ]
+      layers: {
+        indices: { name: 'Indices' },
+        outline: { name: 'Outline' }
+      }
     },
     manchester: {
-      layers: [ 'indices', 'lad', 'outline' ]
+      //layers: [ 'indices', 'lad', 'outline' ]
+      layers: {
+        indices: { name: 'Indices' },
+        lad: {name: 'Local Authority Districts'},
+        outline: { name: 'Outline' }
+      }
     }
   },
 
@@ -2187,14 +2409,6 @@ let Spatial = {
       editable: true
     });
 
-    Spatial.map.fitBounds(
-      [
-        [AppData.manchester.outline.bbox[1], AppData.manchester.outline.bbox[0]],
-        [AppData.manchester.outline.bbox[3], AppData.manchester.outline.bbox[2]]
-      ],
-      { paddingBottomRight: [350, 0] }
-    );
-
     // Move the attribution control to the bottom-left.
     Spatial.map.attributionControl.setPosition('bottomleft');
 
@@ -2208,15 +2422,19 @@ let Spatial = {
     BaseMapLayers.createBaseMapLayers();
 
     // Add the layers on the map.
-    let layers = Spatial.urbanAreas[urbanAreasViewModel.selectedUrbanArea].layers;
+    // let layers = Spatial.urbanAreas[urbanAreasViewModel.selectedUrbanArea].layers;
+    //
+    // for (let i = 0; i < layers.length; i++) {
+    //   MapLayers[layers[i]].createLayer();
+    // }
 
-    for (let i = 0; i < layers.length; i++) {
-      MapLayers[layers[i]].createLayer();
+    let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
+
+    for (let layer in layers) {
+      if (layers.hasOwnProperty(layer)) {
+        MapLayers[layer].createLayer();
+      }
     }
-
-    // MapLayers.indices.createLayer();
-    // MapLayers.lad.createLayer();
-    // MapLayers.outline.createLayer();
 
     Spatial.setInitialBaseMapLayer();
 
@@ -2514,6 +2732,37 @@ let spinnerViewModel = new Vue({
      * Indicates whether the spinner is visible or not.
      */
     isVisible: false
+
+  },
+
+  methods: {
+
+    onShow2() {
+
+      alert('shown');
+
+      // spinnerViewModel.isVisible = true;
+      //
+      // for (let layer in MapLayers) {
+      //   if (MapLayers.hasOwnProperty(layer)) {
+      //     if (MapLayers[layer].isUsed) {
+      //       MapLayers[layer].removeLayer();
+      //     }
+      //   }
+      // }
+      //
+      // AppState.currentUrbanArea = this.selectedUrbanArea;
+      //
+      // let totalLayers = Spatial.urbanAreas[this.selectedUrbanArea].layers.length;
+      //
+      // for (let i = 0; i < totalLayers; i++) {
+      //   let layer = Spatial.urbanAreas[this.selectedUrbanArea].layers[i];
+      //   MapLayers[layer].createLayer();
+      // }
+      //
+      // spinnerViewModel.isVisible = false;
+
+    }
 
   }
 
@@ -2882,12 +3131,43 @@ let urbanAreasViewModel = new Vue({
      */
     onSelectedUrbanAreaChanged() {
 
-      let url = 'https://raw.githubusercontent.com/spa-lab/peri-cene/main/geojson/' + this.selectedUrbanArea + '.geojson';
+      // let url = 'https://raw.githubusercontent.com/spa-lab/peri-cene/main/geojson/' + this.selectedUrbanArea + '.geojson';
+      //
+      // let message = 'Value: ' + this.selectedUrbanArea + '\r\n' +
+      //               'URL:   ' + url;
+      //
+      // alert(message);
 
-      let message = 'Value: ' + this.selectedUrbanArea + '\r\n' +
-                    'URL:   ' + url;
+      spinnerViewModel.isVisible = true;
 
-      alert(message);
+      for (let layer in MapLayers) {
+        if (MapLayers.hasOwnProperty(layer)) {
+          if (MapLayers[layer].isUsed) {
+            MapLayers[layer].removeLayer();
+          }
+        }
+      }
+
+      AppState.currentUrbanArea = this.selectedUrbanArea;
+
+      // let totalLayers = Spatial.urbanAreas[this.selectedUrbanArea].layers.length;
+      //
+      // for (let i = 0; i < totalLayers; i++) {
+      //   let layer = Spatial.urbanAreas[this.selectedUrbanArea].layers[i];
+      //   MapLayers[layer].createLayer();
+      // }
+
+      let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
+
+      for (let layer in layers) {
+        if (layers.hasOwnProperty(layer)) {
+          MapLayers[layer].createLayer();
+        }
+      }
+
+      mapLegendViewModel.updateView();
+
+      spinnerViewModel.isVisible = false;
 
     }
 
@@ -2895,6 +3175,89 @@ let urbanAreasViewModel = new Vue({
 
 });
 
+/**
+ * The mapLegendViewModel provides the data and logic to display the map legend on the web page.
+ *
+ * @type {Vue} - A Vue object with the model and methods used in the view model.
+ */
+let mapLegendViewModel = new Vue({
+
+  /**
+   * The name of the view model.
+   */
+  el: '#mapLegendVM',
+
+  /**
+   * The model of the view model.
+   */
+  data: {
+
+    layers: {
+      outline: 'Outline',
+      lad: 'Local Authority Districts',
+      indices: 'Indices'
+    }
+
+  },
+
+  /**
+   * The computed properties of the model of the view model.
+   */
+  computed: {
+
+    outlineLayerName: {
+      get() {
+        return this.getLayerName('outline');
+      },
+      set() {
+
+      }
+    },
+
+    getLadLayerName: function() {
+      return this.getLayerName('lad');
+    },
+
+    getIndicesLayerName: function() {
+      return this.getLayerName('indices');
+    }
+
+  },
+
+  /**
+   * The methods of the view model.
+   */
+  methods: {
+
+    isLayerUsed: function(layer) {
+      return Spatial.urbanAreas[AppState.currentUrbanArea].layers.hasOwnProperty(layer);
+
+      //return Spatial.urbanAreas[AppState.currentUrbanArea].layers.hasOwnProperty(layer);
+    },
+
+    getLayerName: function(layer) {
+      let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
+      return layers.hasOwnProperty(layer) ? layers[layer].name : 'NULL';
+    },
+
+    updateView: function() {
+
+      let lyrs = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
+
+      for (let layer in this.layers) {
+        if (lyrs.hasOwnProperty(layer)) {
+          this.layers[layer] = lyrs[layer].name
+        }
+        else {
+          this.layers[layer] = 'NULL';
+        }
+      }
+
+    }
+
+  }
+
+});
 
 //
 // ================================================================================

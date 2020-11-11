@@ -336,6 +336,72 @@
 
 
 
+                  <div id="mapLegendVM" class="mt-2 p-1">
+
+                    <div class="card card-body">
+
+                      <table class="table-bordered table-hover legend-table">
+                        <thead>
+                        <tr>
+                          <th scope="col" class="legend-style">Style</th>
+                          <th scope="col" class="legend-name">Layer</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr id="legend-outline"
+                            v-bind:class="[isLayerUsed('outline') ? '' : 'collapse']">
+                          <td class="legend-style"></td>
+                          <td class="legend-name"
+                              v-text="layers.outline">
+                          </td>
+                        </tr>
+                        <tr id="legend-lad"
+                            v-bind:class="[isLayerUsed('lad') ? '' : 'collapse']">
+                          <td class="legend-style"></td>
+                          <td class="legend-name"
+                              v-text="layers.lad">
+                          </td>
+                        </tr>
+                        <tr id="legend-indices"
+                            v-bind:class="[isLayerUsed('indices') ? '' : 'collapse']">
+                          <td class="legend-style"></td>
+                          <td class="legend-name"
+                              v-text="layers.indices">
+                          </td>
+                        </tr>
+                        </tbody>
+
+
+
+<!--                      <tbody v-for="(entry, index) in report"-->
+<!--                             v-if="reportEntriesCount !== 0"-->
+<!--                             v-bind:class="[entry.style]">-->
+<!--                      &lt;!&ndash;                            <tr v-bind:class="[isOdd(index) ? 'table-light' : '']">&ndash;&gt;-->
+<!--                      <tr>-->
+<!--                        &lt;!&ndash;                              <td class="raster-value-value" v-text="entry.value"></td>&ndash;&gt;-->
+<!--                        <td class="raster-value-form"-->
+<!--                            v-bind:class="[entry.function === '' ? 'font-weight-bold' : '']"-->
+<!--                            v-text="entry.form">-->
+<!--                        </td>-->
+<!--                        <td class="raster-value-function" v-text="entry.function"></td>-->
+<!--                        &lt;!&ndash;                              <td class="raster-value-count text-right" v-text="entry.count"></td>&ndash;&gt;-->
+<!--                        <td class="raster-value-percentage text-right"-->
+<!--                            v-bind:class="[entry.function === '' ? 'font-weight-bold' : '']"-->
+<!--                            v-text="entry.percentage.toFixed(3)">-->
+<!--                        </td>-->
+<!--                      </tr>-->
+
+<!--                      </tbody>-->
+
+                    </table>
+
+
+                    </div>
+
+                  </div>
+
+
 
 
                 </div>

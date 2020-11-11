@@ -343,7 +343,7 @@
                       <table class="table-bordered table-hover legend-table">
                         <thead>
                         <tr>
-                          <th scope="col" class="legend-style">Style</th>
+                          <th scope="col" class="legend-style"></th>
                           <th scope="col" class="legend-name">Layer</th>
                         </tr>
                         </thead>
@@ -370,6 +370,34 @@
                               v-text="layers.indices">
                           </td>
                         </tr>
+
+
+                        <tr id="legend-indices-renderer"
+                            v-bind:class="[isLayerUsed('indices') ? '' : 'collapse']">
+                          <td class="legend-style"></td>
+                          <td class="legend-name">
+
+                            <div>
+                              <table>
+                                <tbody>
+                                <tr v-for="(entry, index) in indicesRenderer.classes"
+                                    v-bind:id="['rclass-' + index]"
+                                    v-bind:class="[index > entries - 1 ? 'collapse' : '']">
+                                  <td class="legend-style"
+                                      v-bind:style="entry.style">
+
+                                  </td>
+                                  <td class="legend-renderer-class"
+                                      v-text="entry.text">
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                          </td>
+                        </tr>
+
                         </tbody>
 
 
@@ -392,7 +420,8 @@
 <!--                        </td>-->
 <!--                      </tr>-->
 
-<!--                      </tbody>-->
+
+                      </tbody>
 
                     </table>
 

@@ -554,7 +554,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.7
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -573,7 +573,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.7
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -592,7 +592,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.7
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -611,7 +611,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.6
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -630,7 +630,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.7
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -649,7 +649,7 @@ let Renderers = {
           weight: 0.5,
           opacity: 1,
           fill: true,
-          fillOpacity: 0.7
+          fillOpacity: 0.5
           //lineCap: 'round',  // butt | round | square | inherit
           //lineJoin: 'round'  // miter | round | bevel | inherit
         },
@@ -2930,11 +2930,15 @@ let toggleBaseMapViewModel = new Vue({
       baseLayer.bringToBack();
 
       // Render the layers on the map.
-      let layers = Spatial.urbanAreas[urbanAreasViewModel.selectedUrbanArea].layers;
+      let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
 
-      for (let i = 0; i < layers.length; i++) {
-        MapLayers[layers[i]].renderLayer();
+      for (let layer in layers) {
+        if (layers.hasOwnProperty(layer)) {
+          MapLayers[layer].renderLayer();
+        }
       }
+
+      mapLegendViewModel.updateIndicesRenderer(renderersViewModel.getCurrentRenderer());
 
     }
 
@@ -3060,7 +3064,8 @@ let renderersViewModel = new Vue({
 
       MapLayers.indices.renderLayer();
 
-      //alert(renderer);
+      mapLegendViewModel.updateIndicesRenderer(renderer);
+
 
     }
 
@@ -3196,6 +3201,24 @@ let mapLegendViewModel = new Vue({
       outline: 'Outline',
       lad: 'Local Authority Districts',
       indices: 'Indices'
+    },
+
+    entries: 10,
+
+    indicesRenderer: {
+      classes: {
+        0: { index: 1,  text: '[0, 10]',      style: { backgroundColor: 'rgba(56, 168, 0, 0.7)' } },
+        1: { index: 2,  text: '(10, 20]',     style: { backgroundColor: 'rgba(76, 230, 0, 0.7)' } },
+        2: { index: 3,  text: '(20, 50]',     style: { backgroundColor: 'rgba(85, 255, 0, 0.7)' } },
+        3: { index: 4,  text: '(50, 125]',    style: { backgroundColor: 'rgba(223, 235, 0, 0.7)' } },
+        4: { index: 5,  text: '(125, 300]',   style: { backgroundColor: 'rgba(255, 255, 0, 0.7)' } },
+        5: { index: 6,  text: '(300, 700]',   style: { backgroundColor: 'rgba(234, 174, 0, 0.7)' } },
+        6: { index: 7,  text: '(700, 1500]',  style: { backgroundColor: 'rgba(255, 170, 0, 0.7)' } },
+        7: { index: 8,  text: '(1500, 3500]', style: { backgroundColor: 'rgba(212, 120, 0, 0.7)' } },
+        8: { index: 9,  text: '(3500, 7500]', style: { backgroundColor: 'rgba(191, 73, 0, 0.7)' } },
+        9: { index: 10, text: '> 7500',       style: { backgroundColor: 'rgba(168, 0 ,0, 0.7)' } },
+      },
+
     }
 
   },
@@ -3252,6 +3275,29 @@ let mapLegendViewModel = new Vue({
           this.layers[layer] = 'NULL';
         }
       }
+
+    },
+
+    /**
+     * Updates the legend part of the indices renderer.
+     *
+     * @param renderer - The current renderer.
+     */
+    updateIndicesRenderer(renderer) {
+
+      let rendererTexts = Renderers[renderer].texts;
+      let fillColors = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].fillColors;
+      let fillOpacity = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].baseStyle.fillOpacity * 100;
+
+      for (let entry in rendererTexts) {
+        if (rendererTexts.hasOwnProperty(entry)) {
+          this.indicesRenderer.classes[entry].text = rendererTexts[entry].text;
+          this.indicesRenderer.classes[entry].style.backgroundColor =
+            GlobalFunctions.hexColourToRgbaString(fillColors[entry], fillOpacity);
+        }
+      }
+
+      this.entries = Renderers[renderer].entries;
 
     }
 

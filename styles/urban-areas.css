@@ -107,6 +107,13 @@ body {
   padding-right: 3px;
 }
 
+.legend-renderer-class {
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
 
 /*.raster-value-count {*/
 /*  padding-left: 3px;*/

@@ -333,14 +333,11 @@
 
                   </div>
 
-
-
-
                   <div id="mapLegendVM" class="mt-2 p-1">
 
                     <div class="card card-body">
 
-                      <table class="table-bordered table-hover legend-table">
+                      <table class="table-bordered legend-table">
                         <thead>
                         <tr>
                           <th scope="col" class="legend-style"></th>
@@ -349,28 +346,48 @@
                         </thead>
 
                         <tbody>
+
                         <tr id="legend-outline"
                             v-bind:class="[isLayerUsed('outline') ? '' : 'collapse']">
-                          <td class="legend-style"></td>
+                          <td>
+                            <table>
+                              <tbody>
+                              <tr>
+                                <td class="legend-style"
+                                    v-bind:style="layers.outline.style">.</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </td>
                           <td class="legend-name"
-                              v-text="layers.outline">
+                              v-text="layers.outline.name">
                           </td>
                         </tr>
+
                         <tr id="legend-lad"
                             v-bind:class="[isLayerUsed('lad') ? '' : 'collapse']">
-                          <td class="legend-style"></td>
+                          <td>
+                            <table>
+                              <tbody>
+                              <tr>
+                                <td class="legend-style"
+                                    v-bind:style="layers.lad.style">.</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </td>
                           <td class="legend-name"
-                              v-text="layers.lad">
+                              v-text="layers.lad.name">
                           </td>
                         </tr>
+
                         <tr id="legend-indices"
                             v-bind:class="[isLayerUsed('indices') ? '' : 'collapse']">
                           <td class="legend-style"></td>
                           <td class="legend-name"
-                              v-text="layers.indices">
+                              v-text="layers.indices.name">
                           </td>
                         </tr>
-
 
                         <tr id="legend-indices-renderer"
                             v-bind:class="[isLayerUsed('indices') ? '' : 'collapse']">
@@ -385,7 +402,6 @@
                                     v-bind:class="[index > entries - 1 ? 'collapse' : '']">
                                   <td class="legend-style"
                                       v-bind:style="entry.style">
-
                                   </td>
                                   <td class="legend-renderer-class"
                                       v-text="entry.text">

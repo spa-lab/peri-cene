@@ -2239,15 +2239,15 @@ let MapLayers = {
      */
     selectFeature: function(feature) {
 
-      let polygon = {
-        "type": "Polygon",
-        "coordinates": feature.geometry.coordinates[0]
-      };
-
-      //   feature.geometry;
-      // polygon.type = 'Polygon';
-
-      RestClient.getReportByPolygon(polygon);
+      // let polygon = {
+      //   "type": "Polygon",
+      //   "coordinates": feature.geometry.coordinates[0]
+      // };
+      //
+      // //   feature.geometry;
+      // // polygon.type = 'Polygon';
+      //
+      // RestClient.getReportByPolygon(polygon);
 
     },
 
@@ -2380,7 +2380,7 @@ let Spatial = {
       //layers: [ 'indices', 'outline' ]
       layers: {
         indices: { name: 'Indices' },
-        outline: { name: 'Outline' }
+        outline: { name: 'Area Outline' }
       }
     },
     manchester: {
@@ -2388,7 +2388,7 @@ let Spatial = {
       layers: {
         indices: { name: 'Indices' },
         lad: {name: 'Local Authority Districts'},
-        outline: { name: 'Outline' }
+        outline: { name: 'Area Outline' }
       }
     }
   },
@@ -2737,33 +2737,6 @@ let spinnerViewModel = new Vue({
 
   methods: {
 
-    onShow2() {
-
-      alert('shown');
-
-      // spinnerViewModel.isVisible = true;
-      //
-      // for (let layer in MapLayers) {
-      //   if (MapLayers.hasOwnProperty(layer)) {
-      //     if (MapLayers[layer].isUsed) {
-      //       MapLayers[layer].removeLayer();
-      //     }
-      //   }
-      // }
-      //
-      // AppState.currentUrbanArea = this.selectedUrbanArea;
-      //
-      // let totalLayers = Spatial.urbanAreas[this.selectedUrbanArea].layers.length;
-      //
-      // for (let i = 0; i < totalLayers; i++) {
-      //   let layer = Spatial.urbanAreas[this.selectedUrbanArea].layers[i];
-      //   MapLayers[layer].createLayer();
-      // }
-      //
-      // spinnerViewModel.isVisible = false;
-
-    }
-
   }
 
 });
@@ -2938,6 +2911,7 @@ let toggleBaseMapViewModel = new Vue({
         }
       }
 
+      mapLegendViewModel.updateLayerStyles();
       mapLegendViewModel.updateIndicesRenderer(renderersViewModel.getCurrentRenderer());
 
     }
@@ -3066,7 +3040,6 @@ let renderersViewModel = new Vue({
 
       mapLegendViewModel.updateIndicesRenderer(renderer);
 
-
     }
 
   }
@@ -3102,14 +3075,14 @@ let urbanAreasViewModel = new Vue({
         name:  'Manchester',
         value: 'manchester'
       },
-      {
-        name:  'Urban Area 1',
-        value: 'urbanArea1'
-      },
-      {
-        name:  'Urban Area 2',
-        value: 'urbanArea2'
-      },
+      // {
+      //   name:  'Urban Area 1',
+      //   value: 'urbanArea1'
+      // },
+      // {
+      //   name:  'Urban Area 2',
+      //   value: 'urbanArea2'
+      // },
     ],
 
     /**
@@ -3155,13 +3128,6 @@ let urbanAreasViewModel = new Vue({
 
       AppState.currentUrbanArea = this.selectedUrbanArea;
 
-      // let totalLayers = Spatial.urbanAreas[this.selectedUrbanArea].layers.length;
-      //
-      // for (let i = 0; i < totalLayers; i++) {
-      //   let layer = Spatial.urbanAreas[this.selectedUrbanArea].layers[i];
-      //   MapLayers[layer].createLayer();
-      // }
-
       let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
 
       for (let layer in layers) {
@@ -3170,7 +3136,8 @@ let urbanAreasViewModel = new Vue({
         }
       }
 
-      mapLegendViewModel.updateView();
+      mapLegendViewModel.updateLayerNames();
+      mapLegendViewModel.updateLayerStyles();
 
       spinnerViewModel.isVisible = false;
 
@@ -3198,25 +3165,109 @@ let mapLegendViewModel = new Vue({
   data: {
 
     layers: {
-      outline: 'Outline',
-      lad: 'Local Authority Districts',
-      indices: 'Indices'
+      outline: {
+        name: 'Area Outline',
+        style: {
+          borderColor: ColorPalettes.Material.red.hex,
+          borderWidth: '2pt',
+          color: '#ffffff'
+        }
+      },
+      lad: {
+        name: 'Local Authority Districts',
+        style: {
+          borderColor: ColorPalettes.Material.indigo.hex,
+          borderWidth: '1.2pt',
+          color: '#ffffff'
+        }
+      },
+      indices: { name: 'Indices', style: { } }
     },
 
     entries: 10,
 
     indicesRenderer: {
       classes: {
-        0: { index: 1,  text: '[0, 10]',      style: { backgroundColor: 'rgba(56, 168, 0, 0.7)' } },
-        1: { index: 2,  text: '(10, 20]',     style: { backgroundColor: 'rgba(76, 230, 0, 0.7)' } },
-        2: { index: 3,  text: '(20, 50]',     style: { backgroundColor: 'rgba(85, 255, 0, 0.7)' } },
-        3: { index: 4,  text: '(50, 125]',    style: { backgroundColor: 'rgba(223, 235, 0, 0.7)' } },
-        4: { index: 5,  text: '(125, 300]',   style: { backgroundColor: 'rgba(255, 255, 0, 0.7)' } },
-        5: { index: 6,  text: '(300, 700]',   style: { backgroundColor: 'rgba(234, 174, 0, 0.7)' } },
-        6: { index: 7,  text: '(700, 1500]',  style: { backgroundColor: 'rgba(255, 170, 0, 0.7)' } },
-        7: { index: 8,  text: '(1500, 3500]', style: { backgroundColor: 'rgba(212, 120, 0, 0.7)' } },
-        8: { index: 9,  text: '(3500, 7500]', style: { backgroundColor: 'rgba(191, 73, 0, 0.7)' } },
-        9: { index: 10, text: '> 7500',       style: { backgroundColor: 'rgba(168, 0 ,0, 0.7)' } },
+        0: {
+          index: 1, text: '[0, 10]',
+          style: {
+            backgroundColor: 'rgba(56, 168, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        1: {
+          index: 2,  text: '(10, 20]',
+          style: {
+            backgroundColor: 'rgba(76, 230, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        2: {
+          index: 3,  text: '(20, 50]',
+          style: {
+            backgroundColor: 'rgba(85, 255, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        3: {
+          index: 4,  text: '(50, 125]',
+          style: {
+            backgroundColor: 'rgba(223, 235, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        4: {
+          index: 5,  text: '(125, 300]',
+          style: {
+            backgroundColor: 'rgba(255, 255, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        5: {
+          index: 6,  text: '(300, 700]',
+          style: {
+            backgroundColor: 'rgba(234, 174, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        6: {
+          index: 7,  text: '(700, 1500]',
+          style: {
+            backgroundColor: 'rgba(255, 170, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        7: {
+          index: 8,  text: '(1500, 3500]',
+          style: {
+            backgroundColor: 'rgba(212, 120, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        8: {
+          index: 9,  text: '(3500, 7500]',
+          style: {
+            backgroundColor: 'rgba(191, 73, 0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
+        9: {
+          index: 10, text: '> 7500',
+          style: {
+            backgroundColor: 'rgba(168, 0 ,0, 0.7)',
+            borderColor: ColorPalettes.Material.gray700.hex,
+            borderWidth: '0.5pt'
+          }
+        },
       },
 
     }
@@ -3228,23 +3279,6 @@ let mapLegendViewModel = new Vue({
    */
   computed: {
 
-    outlineLayerName: {
-      get() {
-        return this.getLayerName('outline');
-      },
-      set() {
-
-      }
-    },
-
-    getLadLayerName: function() {
-      return this.getLayerName('lad');
-    },
-
-    getIndicesLayerName: function() {
-      return this.getLayerName('indices');
-    }
-
   },
 
   /**
@@ -3252,29 +3286,56 @@ let mapLegendViewModel = new Vue({
    */
   methods: {
 
+    /**
+     * Indicates whether this layer is used for the current urban area.
+     *
+     * @param layer - The layer defined in the MapLayers.
+     * @returns {boolean} - A boolean value indicating whether this layer is used or not.
+     */
     isLayerUsed: function(layer) {
       return Spatial.urbanAreas[AppState.currentUrbanArea].layers.hasOwnProperty(layer);
-
-      //return Spatial.urbanAreas[AppState.currentUrbanArea].layers.hasOwnProperty(layer);
     },
 
-    getLayerName: function(layer) {
-      let layers = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
-      return layers.hasOwnProperty(layer) ? layers[layer].name : 'NULL';
-    },
-
-    updateView: function() {
+    /**
+     * Updates the names of the layers of the map legend view.
+     */
+    updateLayerNames: function() {
 
       let lyrs = Spatial.urbanAreas[AppState.currentUrbanArea].layers;
 
       for (let layer in this.layers) {
         if (lyrs.hasOwnProperty(layer)) {
-          this.layers[layer] = lyrs[layer].name
+          this.layers[layer].name = lyrs[layer].name
         }
         else {
-          this.layers[layer] = 'NULL';
+          this.layers[layer].name = 'NULL';
         }
       }
+
+    },
+
+    /**
+     * Updates the styles of the layers of the map legend view.
+     */
+    updateLayerStyles: function() {
+
+      let currentBaseMap = toggleBaseMapViewModel.currentBaseMap;
+
+      this.layers.outline.style.borderColor =
+        MapLayers.outline.namedBasemapLayers[currentBaseMap].defaultStyle.color;
+
+      this.layers.outline.style.borderWidth =
+        MapLayers.outline.namedBasemapLayers[
+          currentBaseMap
+        ].defaultStyle.weight.toString() + 'pt';
+
+      this.layers.lad.style.borderColor =
+        MapLayers.lad.namedBasemapLayers[currentBaseMap].defaultStyle.color;
+
+      this.layers.outline.style.borderWidth =
+        MapLayers.outline.namedBasemapLayers[
+          currentBaseMap
+        ].defaultStyle.weight.toString() + 'pt';
 
     },
 
@@ -3288,12 +3349,18 @@ let mapLegendViewModel = new Vue({
       let rendererTexts = Renderers[renderer].texts;
       let fillColors = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].fillColors;
       let fillOpacity = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].baseStyle.fillOpacity * 100;
+      let color = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].baseStyle.color;
+      let opacity = Renderers[renderer].baseMaps[toggleBaseMapViewModel.currentBaseMap].baseStyle.opacity * 100;
 
       for (let entry in rendererTexts) {
         if (rendererTexts.hasOwnProperty(entry)) {
           this.indicesRenderer.classes[entry].text = rendererTexts[entry].text;
+
           this.indicesRenderer.classes[entry].style.backgroundColor =
             GlobalFunctions.hexColourToRgbaString(fillColors[entry], fillOpacity);
+
+          this.indicesRenderer.classes[entry].style.borderColor =
+            GlobalFunctions.hexColourToRgbaString(color, opacity);
         }
       }
 
